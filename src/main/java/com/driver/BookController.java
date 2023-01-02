@@ -70,9 +70,10 @@ public class BookController {
     // pass id as path variable
     // deleteBookById()
     @DeleteMapping("/delete-book-by-id/{id}")
-    public ResponseEntity<String> deleteBookById(@PathVariable("id") Integer id){
+    public String deleteBookById(@PathVariable("id") Integer id){
         getBookList().remove(getBookList().get(id));
-        return new ResponseEntity<>("Successfully deleted.", HttpStatus.OK);
+        //return new ResponseEntity<>("Successfully deleted.", HttpStatus.OK);
+        return "Successfully deleted.";
     }
 
     // get request /get-all-books
@@ -85,9 +86,10 @@ public class BookController {
     // delete request /delete-all-books
     // deleteAllBooks()
     @DeleteMapping("/delete-all-books")
-    public ResponseEntity<String> deleteAllBooks(){
+    public String deleteAllBooks(){
         getBookList().clear();
-        return new ResponseEntity<>("Deleted Successfully.",HttpStatus.OK);
+       // return new ResponseEntity<>("Deleted Successfully.",HttpStatus.OK);
+        return "Successfully deleted.";
     }
 
     // get request /get-books-by-author
