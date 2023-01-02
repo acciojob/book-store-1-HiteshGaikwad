@@ -2,6 +2,7 @@ package com.driver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.*;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,7 +61,7 @@ public class BookController {
     // pass id as path variable
     // getBookById()
     @GetMapping("/get-book-by-id/{id}")
-    public ResponseEntity<Book> getBookById(@PathVariable("id") Integer id){
+    public ResponseEntity<Book> getBookById(@PathVariable("id") int id){
         Book book=null;
         if(getBookList().size()>id) {
              book = getBookList().get(id);
@@ -72,7 +73,7 @@ public class BookController {
     // pass id as path variable
     // deleteBookById()
     @DeleteMapping("/delete-book-by-id/{id}")
-    public ResponseEntity<String> deleteBookById(@PathVariable("id") Integer id){
+    public ResponseEntity<String> deleteBookById(@PathVariable("id") int id){
         getBookList().remove(getBookList().get(id));
         return new ResponseEntity<>("Successfully deleted.", HttpStatus.OK);
     }
