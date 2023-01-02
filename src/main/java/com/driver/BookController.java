@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("books")
+@RequestMapping("/books")
 public class BookController {
 
     private List<Book> bookList;
@@ -39,13 +39,13 @@ public class BookController {
 
     public BookController(){
         this.bookList = new ArrayList<Book>();
-        this.id = getId();
+        this.id = 0;
     }
 
     // post request /create-book
     // pass book as request body
     @PostMapping("/create-book")
-    public ResponseEntity<Book> createBook(@RequestBody Book book){
+    public ResponseEntity<Book> createBook(@RequestBody() Book book){
         // Your code goes here.
         //List<Book> list=new ArrayList<Book>();
         book.setId(id);
@@ -70,10 +70,9 @@ public class BookController {
     // pass id as path variable
     // deleteBookById()
     @DeleteMapping("/delete-book-by-id/{id}")
-    public String deleteBookById(@PathVariable("id") Integer id){
+    public ResponseEntity<String> deleteBookById(@PathVariable("id") Integer id){
         getBookList().remove(getBookList().get(id));
-        //return new ResponseEntity<>("Successfully deleted.", HttpStatus.OK);
-        return "Successfully deleted.";
+        return new ResponseEntity<>("Successfully deleted.", HttpStatus.OK);
     }
 
     // get request /get-all-books
@@ -86,10 +85,9 @@ public class BookController {
     // delete request /delete-all-books
     // deleteAllBooks()
     @DeleteMapping("/delete-all-books")
-    public String deleteAllBooks(){
+    public ResponseEntity<String> deleteAllBooks(){
         getBookList().clear();
-       // return new ResponseEntity<>("Deleted Successfully.",HttpStatus.OK);
-        return "Successfully deleted.";
+        return new ResponseEntity<>("Deleted Successfully.",HttpStatus.OK);
     }
 
     // get request /get-books-by-author
