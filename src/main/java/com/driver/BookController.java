@@ -74,8 +74,9 @@ public class BookController {
     // pass id as path variable
     // deleteBookById()
     @DeleteMapping("/delete-book-by-id/{id}")
-    public ResponseEntity<String> deleteBookById(@PathVariable("id") Integer id){
-        getBookList().remove(getBookList().get(id));
+    public ResponseEntity<String> deleteBookById(@PathVariable("id") String id){
+        int n=Integer.parseInt(id);
+        getBookList().remove(getBookList().get(n));
         return new ResponseEntity<>("Successfully deleted.", HttpStatus.OK);
     }
 
